@@ -15,7 +15,7 @@ app.include_router(files_router, tags=["Files"])
 
 async def background_task(db: Session):
     while True:
-        await asyncio.sleep(1800)
+        await asyncio.sleep(300)
         files = db.query(File).all()
         for file in files:
             print(file.original_name)
