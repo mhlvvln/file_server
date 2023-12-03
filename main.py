@@ -13,18 +13,18 @@ app = FastAPI()
 app.include_router(files_router, tags=["Files"])
 
 
-# async def background_task(db: Session):
-#     while True:
-#         await asyncio.sleep(1800)
-#         files = db.query(File).all()
-#         for file in files:
-#             print(file.original_name)
+async def background_task(db: Session):
+    while True:
+        await asyncio.sleep(1800)
+        files = db.query(File).all()
+        for file in files:
+            print(file.original_name)
 
 
-# @app.on_event("startup")
-# async def startup_event():
-#     db = next(get_db())
-#     asyncio.create_task(background_task(db))
+@app.on_event("startup")
+async def startup_event():
+    db = next(get_db())
+    asyncio.create_task(background_task(db))
 
 
 @app.exception_handler(HTTPException)
