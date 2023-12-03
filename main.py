@@ -9,7 +9,7 @@ from database.database import get_db
 from models import File
 from router import router as files_router
 
-app = FastAPI(title="FileServer e-notGPT", description="Файловый сервер для фотографий[2МБ], видео[100МБ], документов[50МБ].")
+app = FastAPI(title="FileServer e-notGPT", description="Файловый сервер для фотографий[2МБ], видео[100МБ], документов[50МБ]")
 app.include_router(files_router, tags=["Files"])
 
 
