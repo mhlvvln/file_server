@@ -44,7 +44,6 @@ def verify_token(authorization: dict = Header(..., convert_underscores=False)):
     # print(f"{authorization=}")
     try:
         scheme, token = authorization["scheme"], authorization["credentials"]
-        print(scheme, token)
         if scheme.lower() != "bearer":
             raise HTTPException(status_code=401, detail="Invalid authentication scheme")
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -95,8 +94,6 @@ def generate_hash(user_sub: str, filename: str) -> str:
 
 def validate_file_type_and_size(file: UploadFile, type: str, max_size: int, allowed_extensions: list):
     extension = file.content_type.split('/')[1]
-    print(file.content_type)
-    print(extension)
     if extension not in allowed_extensions:
         raise HTTPException(status_code=403,
                             detail=f"Неверный формат файла, допустимые значения: {', .'.join(allowed_extensions)}")
